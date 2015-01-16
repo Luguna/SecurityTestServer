@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Come At Me - Express.Js Secured' });
+  res.render('index', { title: 'Security Test Server - Express.Js Secured' });
 });
 
 module.exports = router;
