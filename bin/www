@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 var debug = require('debug')('SecurityTestServer');
 var app = require('../app');
+var https = require('https');
+var fs = require('fs');
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
+var opts = {
+  key: fs.readFileSync('certificates/server.key'),
+  cert: fs.readFileSync('certificates/server.crt')
+  //ca: fs.readFileSync('certificates/ca.crt'),
+  //requestCert: true,
+  //rejectUnauthorized: true
+};
+
+var server = https.createServer(opts, app).listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
